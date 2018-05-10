@@ -1,5 +1,7 @@
 var CACHE = 'network-or-cache'
 
+var IAMGE_URL = 'https://picsum.photos/200/300/?random'
+
 self.addEventListener('install', function(evt) {
   console.log('The service worker is being installed.')
   evt.waitUntil(precache())
@@ -25,7 +27,7 @@ function precache() {
     console.log('get cache file!')
     return cache.addAll([
       './index.html',
-      'https://picsum.photos/200/300/?random'
+      IAMGE_URL
     ]);
   });
 }
@@ -52,10 +54,10 @@ function fromCache(request) {
   })
 }
 
-function updateCacheImage (request, data) {
+function updateCacheImage () {
   caches.open(CACHE).then(function (cache) {
-    cache.delete(request).then(function () {
-      cache.add(request).then(function () {
+    cache.delete(IAMGE_URL).then(function () {
+      cache.add(IAMGE_URL).then(function () {
         console.log('update cache image!')
       })
     })
