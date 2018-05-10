@@ -38,6 +38,7 @@ function fromNetwork(request, timeout) {
       console.log('get image from network!')
       clearTimeout(timeoutId)
       fulfill(response)
+      updateCacheImage(response)
     }, reject)
   })
 }
@@ -47,6 +48,15 @@ function fromCache(request) {
     return cache.match(request).then(function (matching) {
       console.log('get image from cache storage!')
       return matching || Promise.reject('no-match')
+    })
+  })
+}
+
+function updateCacheImage (request, data) {
+  caches.open(CACHE).then(function (cache) {
+    cache.match(request).then(function (matching) {
+      console.log('update cache image!')
+      matching = data  
     })
   })
 }
