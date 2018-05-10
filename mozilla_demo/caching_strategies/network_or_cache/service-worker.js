@@ -37,8 +37,8 @@ function fromNetwork(request, timeout) {
     fetch(request).then(function (response) {
       console.log('get image from network!')
       clearTimeout(timeoutId)
-      fulfill(response)
       updateCacheImage(response)
+      fulfill(response)
     }, reject)
   })
 }
