@@ -55,8 +55,8 @@ function fromCache(request) {
 }
 
 function updateCacheImage (request, response) {
-  if (request !== CACHE) return
-  caches.open(request).then(function (cache) {
+  if (request !== IAMGE_URL) return
+  caches.open(CACHE).then(function (cache) {
     cache.delete(request).then(function () {
       cache.put(request, response)
     })
