@@ -39,7 +39,7 @@ function fromNetwork(request, timeout) {
     fetch(request).then(function (response) {
       console.log('get image from network!')
       clearTimeout(timeoutId)
-      updateCacheImage(request)
+      updateCacheImage(request, response)
       fulfill(response)
     }, reject)
   })
@@ -54,12 +54,11 @@ function fromCache(request) {
   })
 }
 
-function updateCacheImage () {
-  caches.open(CACHE).then(function (cache) {
-    cache.delete(IAMGE_URL).then(function () {
-      cache.addAll([
-        IAMGE_URL
-      ])
+function updateCacheImage (request, response) {
+  if (request !== CACHE) return
+  caches.open(request).then(function (cache) {
+    cache.delete(request).then(function () {
+      cache.put(request, response)
     })
   })
 }
