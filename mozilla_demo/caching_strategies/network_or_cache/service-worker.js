@@ -7,10 +7,16 @@ self.addEventListener('install', function(evt) {
 
 self.addEventListener('fetch', function(evt) {
   console.log('The service worker is serving the asset.');
-  evt.respondWith(fromNetwork(evt.request, 400).catch(function () {
-    return fromCache(evt.request);
-  }));
-});
+  evt.respondWith(
+    fromNetwork(evt.request, 400)
+      .then(function () {
+        console.log('success get image from Network in 400ms!')
+      })
+      .catch(function () {
+        return fromCache(evt.request)
+      })
+  )
+})
 
 
 function precache() {
