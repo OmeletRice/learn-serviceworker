@@ -15,6 +15,7 @@ self.addEventListener('fetch', function(evt) {
 
 function precache() {
   return caches.open(CACHE).then(function (cache) {
+    console.log('get cache file!')
     return cache.addAll([
       './index.html',
       'https://picsum.photos/200/300/?random'
