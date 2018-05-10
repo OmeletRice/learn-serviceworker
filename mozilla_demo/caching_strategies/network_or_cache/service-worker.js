@@ -54,9 +54,10 @@ function fromCache(request) {
 
 function updateCacheImage (request, data) {
   caches.open(CACHE).then(function (cache) {
-    cache.match(request).then(function (matching) {
-      console.log('update cache image!')
-      matching = data  
+    cache.delete(request).then(function () {
+      cache.add(request).then(function () {
+        console.log('update cache image!')
+      })
     })
   })
 }
