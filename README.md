@@ -6,4 +6,5 @@
 
 ## 第一部分 Mozilla_demo
 ### 缓存策略  
-  1. [network and cache](https://omeletrice.github.io/learn-serviceworker/mozilla_demo/caching_strategies/network_or_cache/index.html)  
+  1. [network and cache](https://omeletrice.github.io/learn-serviceworker/mozilla_demo/caching_strategies/network_or_cache/index.html)  [[解释]](https://github.com/OmeletRice/learn-serviceworker/blob/master/mozilla_demo/caching_strategies/network_or_cache/readme.md)  
+  
