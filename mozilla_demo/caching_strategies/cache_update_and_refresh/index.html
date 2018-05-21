@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Cache, Update and refresh</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+   body {
+     text-align: center;
+   }
+  </style>
+</head>
+<body>
+  <p>这是一张随机的图片</p>
+  <img src="https://picsum.photos/200/300/?random" alt="sample asset">
+
+  <button id="refresh">has new image</button>
+  <script>
+    navigator.serviceWorker.register('service-worker.js', {
+      // scope: './index'
+    })
+
+    var CACHE = 'cache-update-and-refresh'
+
+    var updateBtn = document.querySelector('#refresh')
+    var img = document.querySelector('img')
+
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.onmessage = function (evt) {
+        var msg = JSON.parse(evt.data)
+
+        console.log('msg', msg)
+        var isRefresh = msg.type === 'refresh'
+        var lastETag = localStorage.currentETag
+
+        var isNew = lastETag !== msg.eTag
+
+        if (isRefresh & isNew) {
+          if (lastETag) {
+            updateBtn.disabled = false
+          }
+
+          localStorage.currentETag = msg.eTag
+        }
+      }
+
+      updateBtn.onclick = function (evt) {
+        evt.preventDefault()
+
+        caches.open(CACHE)
+          .then(function (cache) {
+            return cache.match(img.src)
+          })
+          .then(function (response) {
+            return response.blob()
+          })
+          .then(function (blob) {
+            var url = URL.createObjectURL(blob)
+            img.src = url
+            updateBtn.disabled = true
+          })
+      }
+    }
+  </script>
+</body>
+</html>
