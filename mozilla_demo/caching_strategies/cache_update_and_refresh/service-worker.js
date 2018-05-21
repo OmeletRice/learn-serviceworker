@@ -1,6 +1,6 @@
 var CACHE = 'cache-update-and-refresh'
 
-var IAMGE_URL = 'https://picsum.photos/200/300/?random'
+var IAMGE_URL = 'https://serviceworke.rs/strategy-cache-update-and-refresh/asset'
  
 self.addEventListener('install', function(evt) {
   console.log('The service worker is being installed.')
