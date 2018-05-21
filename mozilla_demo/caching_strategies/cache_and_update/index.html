@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Cache and Update</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+   body {
+     text-align: center;
+   }
+  </style>
+</head>
+<body>
+  <p>这是一张随机的图片</p>
+  <img src="https://picsum.photos/200/300/?random" alt="sample asset">
+
+  <script>
+    navigator.serviceWorker.register('service-worker.js', {
+      // scope: './index'
+    });
+  </script>
+</body>
+</html>
